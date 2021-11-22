@@ -11,7 +11,7 @@ Rozsądnie byłoby umieścić narzędzia tego typu w oddzielnym pakiecie.
 ```
 Na górze plików `utils/Shower.java` oraz `utils/Mover.java` znajdują się stosowne komentarze.
 
-Sensownym wydaje się, że indywidualne zmiany w tych plikach również nie podlegały ocenie.
+Sensownym wydaje się, żeby indywidualne zmiany w tych plikach również nie podlegały ocenie.
 
 # MIMUW Cube
 
@@ -28,6 +28,16 @@ Więcej szczegółów można znaleźć w pliku demonstracyjnym oraz samej implem
 ## Mover
 
 Jest to klasa parsująca notację kostki Rubika na odpowiednie metody wywoływane na kostce.
+
+### Notacja
+
+O notacji algorytmów kostki Rubika można poczytać tutaj:
+
+[kostka 3x3x3](https://jperm.net/3x3/moves)
+
+[kostka 4x4x4](https://www.kewbz.co.uk/blogs/notations/4x4-cube-notations-guide-wca-official)
+
+kostka 2x2x2 - tak samo jak 3x3x3, ale nie ma środkowych warstw
 
 ### Obsługiwane przypadki
 
