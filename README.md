@@ -47,4 +47,4 @@ Z wyłączeniem tego, obsługuje kostki wielkości
 1,
 2,
 3 (z wyjątkiem ruchów dwiema warstwami na raz, np 'r', które są używane w kostce 4x4 jako ruch wewnętrzną warstwą)
-oraz 4 (obie notacje 'Rr' oraz 'Rw').
+oraz 4 (jedynie notacja 'Rw', nie 'Rr').

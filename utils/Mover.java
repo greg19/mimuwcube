@@ -15,9 +15,14 @@ import static java.util.Map.entry;
 
 import concurrentcube.Cube;
 
+/**
+ * A utilities class, that parses Rubik's cube notation, and applies moves to a
+ * cube instance.
+ */
 public class Mover {
 
-    private Mover() {};
+    private Mover() {
+    };
 
     private static void rotate(Cube cube, int side, int layer) {
         try {
@@ -36,13 +41,24 @@ public class Mover {
             entry("d", cube -> rotate(cube, 5, 1)), entry("M", cube -> rotate(cube, 1, 1)),
             entry("S", cube -> rotate(cube, 2, 1)), entry("E", cube -> rotate(cube, 5, 1)));
 
+    /**
+     * Applies a single move to a cube.
+     * @param cube cube to move
+     * @param move move to apply
+     */
     private static void motion(Cube cube, String move) {
         if (!moves.containsKey(move))
             throw new IllegalArgumentException("Invalid single motion '" + move + "'");
         moves.get(move).accept(cube);
     }
 
-    private static void composedMotion(Cube cube, String move) throws InterruptedException {
+    /**
+     * Parses a composed move, and applies it to a cube. Composed move is a move,
+     * with one of the modifiers at the end: ', 2 or w
+     * @param cube cube to move
+     * @param move move to apply
+     */
+    private static void composedMotion(Cube cube, String move) {
         if (move.length() == 1) {
             motion(cube, move);
             return;
@@ -65,12 +81,30 @@ public class Mover {
         }
     }
 
-    public static String move(Cube cube, String sequence) throws InterruptedException {
+    /**
+     * Applies a sequence of moves to a cube. Consecutive moves should be separated
+     * with space.
+     * @param cube     cube to move
+     * @param sequence space separated sequence of moves
+     * @return final view of the cube, or empty string if thread was interrupted.
+     */
+    public static String move(Cube cube, String sequence) {
         for (String move : sequence.split(" "))
             composedMotion(cube, move);
-        return cube.show();
+        try {
+            return cube.show();
+        } catch (InterruptedException e) {
+            return "";
+        }
     }
 
+    /**
+     * Applies a sequence of moves to a cube. Consecutive moves should be separated
+     * with space.
+     * @param cube     cube to move
+     * @param sequence space separated sequence of moves
+     * @return list of cube views after each single move (plus at the beginning)
+     */
     public static List<String> states(Cube cube, String sequence) throws InterruptedException {
         List<String> states = new ArrayList<>();
         states.add(cube.show());
