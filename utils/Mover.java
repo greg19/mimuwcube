@@ -42,7 +42,7 @@ public class Mover {
             rotate(cube, side, 1);
         }
         else {
-            throw new IllegalArgumentException("Small letters can only be applied to 3x3 and 4x4 cubes");
+            throw new IllegalArgumentException("Small letters can only be applied to 3x3, 4x4 and 5x5 cubes");
         }
     };
 

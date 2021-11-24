@@ -38,8 +38,11 @@ public class Shower {
         defaultMode = mode;
     }
 
-    private static int getSize(String str) {
-        return (int) Math.sqrt(str.length() / 6);
+    private static int getSize(int length) {
+        int result = (int) Math.round(Math.sqrt(length / 6));
+        if (6*result*result != length)
+            throw new IllegalArgumentException("Given string length is not correct for any cube size");
+        return result;
     }
 
     /**
@@ -60,7 +63,7 @@ public class Shower {
     }
 
     private static String grid(String str) {
-        int size = getSize(str);
+        int size = getSize(str.length());
         String[] faces = str.split("(?<=\\G.{" + size * size + "})");
         String offset = (" ".repeat(size) + "\n").repeat(size);
         for (int i = 0; i < 6; i++)
