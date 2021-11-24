@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+import java.util.stream.IntStream;
 
 import static java.util.Map.entry;
 
@@ -37,7 +38,7 @@ public class Mover {
             rotate(cube, side, 0);
             rotate(cube, side, 1);
         }
-        else if (cube.getSize() == 4) {
+        else if (cube.getSize() == 4 || cube.getSize() == 5) {
             rotate(cube, side, 1);
         }
         else {
@@ -60,7 +61,11 @@ public class Mover {
             entry("d", cube -> smallLetter(cube, 5)),
             entry("M", cube -> rotate(cube, 1, cube.getSize()/2)),
             entry("S", cube -> rotate(cube, 2, cube.getSize()/2)),
-            entry("E", cube -> rotate(cube, 5, cube.getSize()/2)));
+            entry("E", cube -> rotate(cube, 5, cube.getSize()/2)),
+            entry("x", cube -> IntStream.range(0, cube.getSize()).parallel().forEach(x -> rotate(cube, 3, x))),
+            entry("y", cube -> IntStream.range(0, cube.getSize()).parallel().forEach(x -> rotate(cube, 0, x))),
+            entry("z", cube -> IntStream.range(0, cube.getSize()).parallel().forEach(x -> rotate(cube, 2, x)))
+    );
 
     /**
      * Applies a single move to a cube.

@@ -46,10 +46,9 @@ Zakłada zatem, że klasa `concurrentcube.Cube` udostępnia metodę `public int 
 
 ### Obsługiwane przypadki
 
-Aktualnie parser jest bardzo ograniczony.
-Nie obsługuje obrotów całej kostki (ruchów 'x', 'y' i 'z').
-Z wyłączeniem tego, obsługuje kostki wielkości
+Aktualnie parser jest bardzo ograniczony i obsługuje jedynie kostki wielkości
 1,
 2,
 3,
-oraz 4 (jedynie notacja 'Rw', nie 'Rr').
+4 (jedynie notacja 'Rw', nie 'Rr'),
+5 (również notacja z 'w')
