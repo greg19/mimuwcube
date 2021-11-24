@@ -58,8 +58,21 @@ public class Shower {
         String[] t2 = s2.split("\n");
         if (t1.length != t2.length)
             throw new IllegalArgumentException("Both strings should have the same number of rows");
-        return IntStream.range(0, t1.length).boxed().map(i -> t1[i] + joining + t2[i]).collect(Collectors.joining("\n"))
-                + "\n";
+        return IntStream.range(0, t1.length).mapToObj(i -> t1[i] + joining + t2[i]).collect(Collectors.joining("\n")) + "\n";
+    }
+
+    /**
+     * Puts many strings side by side. Strings need to have the same number of rows.
+     * @param joining a delimiter put in between each pair of rows
+     * @param strings strings to connect
+     * @return connected strings
+     * @throws IllegalArgumentException if strings have different number of rows
+     */
+    public static String connectMany(String joining, String... strings) {
+        String act = strings[0];
+        for (int i = 1; i < strings.length; i++)
+            act = connect(act, strings[i], joining);
+        return act;
     }
 
     private static String grid(String str) {
@@ -68,12 +81,9 @@ public class Shower {
         String offset = (" ".repeat(size) + "\n").repeat(size);
         for (int i = 0; i < 6; i++)
             faces[i] = String.join("\n", faces[i].split("(?<=\\G.{" + size + "})")) + "\n";
-        String offset2 = connect(offset, offset, " ");
-        String f0 = connect(offset, faces[0], " ");
-        String f12 = connect(faces[1], faces[2], " ");
-        String f34 = connect(faces[3], faces[4], " ");
-        String f5 = connect(offset, faces[5], " ");
-        return connect(f0, offset2, " ") + connect(f12, f34, " ") + connect(f5, offset2, " ");
+        return connectMany(" ", offset, faces[0], offset, offset) + 
+            connectMany(" ", faces[1], faces[2], faces[3], faces[4]) +
+            connectMany(" ", offset, faces[5], offset, offset);
     }
 
     private static String map(String str, Function<Character, String> f) {
