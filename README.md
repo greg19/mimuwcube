@@ -39,6 +39,11 @@ O notacji algorytmów kostki Rubika można poczytać tutaj:
 
 kostka 2x2x2 - tak samo jak 3x3x3, ale nie ma środkowych warstw
 
+### Dodatkowe założenia
+
+Aby parser mógł działać poprawnie, potrzebuje znać wielkość kostki.
+Zakłada zatem, że klasa `concurrentcube.Cube` udostępnia metodę `public int getSize()`, zwracającą wielkość kostki oraz nie rzucającą żadnymi wyjątkami wymagającymi łapania.
+
 ### Obsługiwane przypadki
 
 Aktualnie parser jest bardzo ograniczony.
@@ -46,5 +51,5 @@ Nie obsługuje obrotów całej kostki (ruchów 'x', 'y' i 'z').
 Z wyłączeniem tego, obsługuje kostki wielkości
 1,
 2,
-3 (z wyjątkiem ruchów dwiema warstwami na raz, np 'r', które są używane w kostce 4x4 jako ruch wewnętrzną warstwą)
+3,
 oraz 4 (jedynie notacja 'Rw', nie 'Rr').

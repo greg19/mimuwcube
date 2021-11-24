@@ -32,14 +32,35 @@ public class Mover {
         }
     }
 
-    private static final Map<String, Consumer<Cube>> moves = Map.ofEntries(entry("U", cube -> rotate(cube, 0, 0)),
-            entry("u", cube -> rotate(cube, 0, 1)), entry("L", cube -> rotate(cube, 1, 0)),
-            entry("l", cube -> rotate(cube, 1, 1)), entry("F", cube -> rotate(cube, 2, 0)),
-            entry("f", cube -> rotate(cube, 2, 1)), entry("R", cube -> rotate(cube, 3, 0)),
-            entry("r", cube -> rotate(cube, 3, 1)), entry("B", cube -> rotate(cube, 4, 0)),
-            entry("b", cube -> rotate(cube, 4, 1)), entry("D", cube -> rotate(cube, 5, 0)),
-            entry("d", cube -> rotate(cube, 5, 1)), entry("M", cube -> rotate(cube, 1, 1)),
-            entry("S", cube -> rotate(cube, 2, 1)), entry("E", cube -> rotate(cube, 5, 1)));
+    private static void smallLetter(Cube cube, int side) {
+        if (cube.getSize() == 3) {
+            rotate(cube, side, 0);
+            rotate(cube, side, 1);
+        }
+        else if (cube.getSize() == 4) {
+            rotate(cube, side, 1);
+        }
+        else {
+            throw new IllegalArgumentException("Small letters can only be applied to 3x3 and 4x4 cubes");
+        }
+    };
+
+    private static final Map<String, Consumer<Cube>> moves = Map.ofEntries(
+            entry("U", cube -> rotate(cube, 0, 0)),
+            entry("L", cube -> rotate(cube, 1, 0)),
+            entry("F", cube -> rotate(cube, 2, 0)),
+            entry("R", cube -> rotate(cube, 3, 0)),
+            entry("B", cube -> rotate(cube, 4, 0)),
+            entry("D", cube -> rotate(cube, 5, 0)),
+            entry("u", cube -> smallLetter(cube, 0)),
+            entry("l", cube -> smallLetter(cube, 1)),
+            entry("f", cube -> smallLetter(cube, 2)),
+            entry("r", cube -> smallLetter(cube, 3)),
+            entry("b", cube -> smallLetter(cube, 4)),
+            entry("d", cube -> smallLetter(cube, 5)),
+            entry("M", cube -> rotate(cube, 1, cube.getSize()/2)),
+            entry("S", cube -> rotate(cube, 2, cube.getSize()/2)),
+            entry("E", cube -> rotate(cube, 5, cube.getSize()/2)));
 
     /**
      * Applies a single move to a cube.
