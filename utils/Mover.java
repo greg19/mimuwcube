@@ -105,6 +105,7 @@ public class Mover {
             motion(cube, move.substring(0, 1).toLowerCase());
             return;
         }
+        throw new IllegalArgumentException("Invalid composed motion '" + move + "'");
     }
 
     /**
@@ -135,7 +136,7 @@ public class Mover {
         List<String> states = new ArrayList<>();
         states.add(cube.show());
         for (String move : sequence.split(" ")) {
-            motion(cube, move);
+            composedMotion(cube, move);
             states.add(cube.show());
         }
         return states;
